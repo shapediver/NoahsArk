@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Sdk Name="Microsoft.NET.Sdk" />
+  <Import Project="../CommonSettings.csproj" />
+  <Import Project="../CommonReferencesTests.csproj" />
+  <PropertyGroup>
+    <RootNamespace>$(CommonNamespace).Tests.Shared</RootNamespace>
+    <AssemblyName>$(CommonName).Tests.Shared</AssemblyName>
+    <Description>Tests for shared functionality not depending on Rhino</Description>
+    <EnableDefaultItems>true</EnableDefaultItems>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>true</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultNoneItems>true</EnableDefaultNoneItems>
+  </PropertyGroup>
+  <Import Project="../CommonSettingsFinal.csproj" />
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+</Project>

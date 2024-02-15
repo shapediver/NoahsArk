@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+      Settings common to all projects. 
+      Import this at the top of your .csproj files.
+  -->
+
+  <!--
+        Import variables common to all projects (version, naming, authorship, etc).
+  -->
+  <Import Project="CommonVariables.csproj"/>
+
+  <!--
+        Basic settings.
+  -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">DebugR7</Configuration>
+    <Configurations>DebugR7;DebugR8;ReleaseR7;ReleaseR8</Configurations>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <PlatformTarget Condition=" '$(PlatformTarget)' == '' ">AnyCPU</PlatformTarget>
+    <!--
+          Default inclusion of files
+          https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enabledefaultitems
+    -->
+    <BuildTimestamp>$([System.DateTime]::Now.ToString("o"))</BuildTimestamp>
+    <OutputPath>$(MSBuildThisFileDirectory)\bin\$(Configuration)\</OutputPath>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <!--
+        Import build configurations
+  -->
+  <Import Project="BuildConfigurations.csproj"/>
+
+  <PropertyGroup>
+    <!-- 
+          Decide whether to copy NuGet package dependencies to the output directory 
+          see https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#copylocallockfileassemblies
+    -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <!--
+      Auto-generated AssemblyInfo
+      https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#assembly-attribute-properties 
+  -->
+  <PropertyGroup>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Version>$(CommonVersionMajor).$(CommonVersionMinor).$(CommonVersionPatch)$(CommonVersionSuffix)</Version>
+    <Authors>$(CommonAuthors)</Authors>
+    <Company>$(CommonCompany)</Company>
+    <CopyRight>$(CommonCopyright)</CopyRight>
+    <Product>$(CommonProduct)</Product>
+  </PropertyGroup>
+  <ItemGroup>
+
+    <!-- 
+      Include some System.Reflection.AssemblyMetadataAttribute for storing the contact information 
+      and other metadata as assembly attributes. 
+      see https://learn.microsoft.com/en-us/dotnet/standard/assembly/set-attributes-project-file#set-arbitrary-attributes
+    -->
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>AuthorContact</_Parameter1>
+      <_Parameter2>$(CommonAuthorContact)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>Authors</_Parameter1>
+      <_Parameter2>$(CommonAuthors)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>BuildTimestamp</_Parameter1>
+      <_Parameter2>$(BuildTimestamp)</_Parameter2>
+    </AssemblyAttribute>
+
+  </ItemGroup>
+</Project>

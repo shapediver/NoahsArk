@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Sdk Name="Microsoft.NET.Sdk" />
+  
+  <Import Project="../CommonSettings.csproj" />
+  <Import Project="../CommonReferencesRhino.csproj" />
+  <Import Project="../CommonReferencesGrasshopper.csproj" />
+  
+  <PropertyGroup>
+    <RootNamespace>$(CommonNamespace).PluginGrasshopper</RootNamespace>
+    <AssemblyName>$(CommonName).PluginGrasshopper</AssemblyName>
+    <AssemblyTitle>$(CommonName)</AssemblyTitle>
+    <Description>$(Product)</Description>
+    <EnableDefaultItems>true</EnableDefaultItems>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>true</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultNoneItems>true</EnableDefaultNoneItems>
+    <TargetExt>.gha</TargetExt>
+  </PropertyGroup>
+  
+  <!--
+    Embedded resources
+    see https://learn.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-items?view=vs-2022#embeddedresource
+    and https://khalidabuhakmeh.com/how-to-use-embedded-resources-in-dotnet
+  -->
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedResources\**\*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- 
+      Include a GuidAttribute which will be used as our unique Grasshopper plugin id. 
+      see https://learn.microsoft.com/en-us/dotnet/standard/assembly/set-attributes-project-file#set-arbitrary-attributes
+    -->
+    <AssemblyAttribute Include="System.Runtime.InteropServices.GuidAttribute">
+      <_Parameter1>96217CE5-E37A-4BC6-93C3-CBCBAB996A90</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  
+  <Import Project="../CommonSettingsFinal.csproj" />
+  
+</Project>

@@ -1,0 +1,2 @@
+yak package build scripts
+combined net48 and net7 yak package
