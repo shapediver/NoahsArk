@@ -115,8 +115,8 @@
     <CopyRight>$(CommonCopyright)</CopyRight>
     <Product>$(CommonProduct)</Product>
   </PropertyGroup>
+  
   <ItemGroup>
-
     <!-- 
       Include some System.Reflection.AssemblyMetadataAttribute for storing the contact information 
       and other metadata as assembly attributes. 
@@ -136,4 +136,15 @@
     </AssemblyAttribute>
 
   </ItemGroup>
+  
+  <!--
+        Import task definitions.
+  -->
+  <Import Project="CommonTasks.csproj"/>
+  
+  <!--
+        Import target definitions.
+  -->
+  <Import Project="CommonTargets.csproj"/>
+  
 </Project>

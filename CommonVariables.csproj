@@ -35,5 +35,13 @@
     <CommonCompany>ShapeDiver</CommonCompany>
     <CommonCopyright>ShapeDiver GmbH 2024</CommonCopyright>
     <CommonProduct>Noah's Ark plug-in for Grasshopper and Rhino</CommonProduct>
+    <YakName>$(CommonName)</YakName>
+    <YakAuthors>$(CommonAuthors), $(CommonCompany)</YakAuthors>
+    <YakDescription>$(CommonProduct)</YakDescription>
+    <YakUrl>https://github.com/shapediver/GrasshopperPluginTemplate</YakUrl>
+    <YakIconUrl>https://github.com/shapediver/GrasshopperPluginTemplate/blob/a7fc6515609bc84d99f9b8dc5f2f062899a7eb11/Artwork/NoahsArkIcon_32.png</YakIconUrl>
+    <YakKeywords>- ShapeDiver
+- Grasshopper
+- Template</YakKeywords>
   </PropertyGroup>
 </Project>
