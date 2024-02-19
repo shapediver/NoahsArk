@@ -5,17 +5,27 @@
   <Import Project="../CommonSettings.csproj" />
   <Import Project="../CommonReferencesRhino.csproj" />
   <Import Project="../CommonReferencesGrasshopper.csproj" />
+  <Import Project="../CommonReferencesSystemDrawing.csproj" />
   
   <PropertyGroup>
     <RootNamespace>$(CommonNamespace).PluginGrasshopper</RootNamespace>
     <AssemblyName>$(CommonName).PluginGrasshopper</AssemblyName>
     <AssemblyTitle>$(CommonName)</AssemblyTitle>
     <Description>$(Product)</Description>
+    <TargetExt>.gha</TargetExt>
+    <!--
+          Default inclusion of files
+          https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enabledefaultitems
+    -->
     <EnableDefaultItems>true</EnableDefaultItems>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <EnableDefaultEmbeddedResourceItems>true</EnableDefaultEmbeddedResourceItems>
     <EnableDefaultNoneItems>true</EnableDefaultNoneItems>
-    <TargetExt>.gha</TargetExt>
+    <!-- 
+          EnableDynamicLoadingis explained here:
+          https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enabledynamicloading
+    -->
+    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   
   <!--

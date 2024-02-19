@@ -9,11 +9,20 @@
     <RootNamespace>$(CommonNamespace).PluginRhino</RootNamespace>
     <AssemblyName>$(CommonName).PluginRhino</AssemblyName>
     <Description>$(Product)</Description>
+    <TargetExt>.rhp</TargetExt>
+    <!--
+          Default inclusion of files
+          https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enabledefaultitems
+    -->
     <EnableDefaultItems>true</EnableDefaultItems>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <EnableDefaultEmbeddedResourceItems>true</EnableDefaultEmbeddedResourceItems>
     <EnableDefaultNoneItems>true</EnableDefaultNoneItems>
-    <TargetExt>.rhp</TargetExt>
+    <!-- 
+          EnableDynamicLoadingis explained here:
+          https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enabledynamicloading
+    -->
+    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
 
   <!--

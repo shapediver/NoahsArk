@@ -24,7 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE2713C1-7811-4EE6-A885-7E3A904B43A7}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		BuildConfigurations.csproj = BuildConfigurations.csproj
 		CommonReferencesGrasshopper.csproj = CommonReferencesGrasshopper.csproj
 		CommonReferencesRhino.csproj = CommonReferencesRhino.csproj
 		CommonReferencesTests.csproj = CommonReferencesTests.csproj
