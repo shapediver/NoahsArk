@@ -23,24 +23,43 @@ namespace NoahsArk.SharedRhino
             return true;
         }
 
-        private void AddFaceToMesh(Mesh inmesh, MeshFace face, Mesh outmesh, int[] map)
+        private void AddFaceToMesh(Mesh inmesh, int faceIndex, Mesh outmesh, int[] map, bool copyVertexNormals, bool copyVertexColors, bool copyFaceNormals)
         {
-            if (map[face.A] == 0)
-                map[face.A] = outmesh.Vertices.Add(inmesh.Vertices[face.A]);
+            var addVertex = new Action<int>((idx) =>
+            {
+                map[idx] = outmesh.Vertices.Add(inmesh.Vertices[idx]);
+                if (copyVertexNormals)
+                    outmesh.Normals.Add(inmesh.Normals[idx]);
+                if (copyVertexColors)
+                    outmesh.VertexColors.Add(inmesh.VertexColors[idx]);
+            });
 
+            var face = inmesh.Faces[faceIndex];
+
+            if (map[face.A] == 0)
+                addVertex(face.A);
+        
             if (map[face.B] == 0)
-                map[face.B] = outmesh.Vertices.Add(inmesh.Vertices[face.B]);
+                addVertex(face.B);
 
             if (map[face.C] == 0)
-                map[face.C] = outmesh.Vertices.Add(inmesh.Vertices[face.C]);
+                addVertex(face.C);
 
             if (face.IsQuad && map[face.D] == 0)
-                map[face.D] = outmesh.Vertices.Add(inmesh.Vertices[face.D]);
+                addVertex(face.D);
 
             if (face.IsQuad)
+            {
                 outmesh.Faces.AddFace(map[face.A], map[face.B], map[face.C], map[face.D]);
+                if (copyFaceNormals)
+                    outmesh.FaceNormals.AddFaceNormal(inmesh.FaceNormals[faceIndex]);
+            }
             else
+            {
                 outmesh.Faces.AddFace(map[face.A], map[face.B], map[face.C]);
+                if (copyFaceNormals)
+                    outmesh.FaceNormals.AddFaceNormal(inmesh.FaceNormals[faceIndex]);
+            }
         }
 
         public void SplitAlongPlane(Mesh mesh, Plane plane, out Mesh negMesh, out Mesh posMesh)
@@ -51,12 +70,17 @@ namespace NoahsArk.SharedRhino
             var negIndexMap = new int[mesh.Vertices.Count];
             var posIndexMap = new int[mesh.Vertices.Count];
 
-            foreach (var face in mesh.Faces)
+            bool copyVertexNormals = mesh.Normals.Count == mesh.Vertices.Count;
+            bool copyVertexColors = mesh.VertexColors.Count == mesh.Vertices.Count;
+            bool copyFaceNormals = mesh.FaceNormals.Count == mesh.Faces.Count;
+
+            for (int faceIndex = 0; faceIndex < mesh.Faces.Count; faceIndex++)
             {
+                var face = mesh.Faces[faceIndex];
                 if (IsFaceInNegativeHalfspace(mesh, face, plane))
-                    AddFaceToMesh(mesh, face, negMesh, negIndexMap);
+                    AddFaceToMesh(mesh, faceIndex, negMesh, negIndexMap, copyVertexNormals, copyVertexColors, copyFaceNormals);
                 else
-                    AddFaceToMesh(mesh, face, posMesh, posIndexMap);
+                    AddFaceToMesh(mesh, faceIndex, posMesh, posIndexMap, copyVertexNormals, copyVertexColors, copyFaceNormals);
             }
         }
 
@@ -80,22 +104,27 @@ namespace NoahsArk.SharedRhino
                 _meshes[i] = new Mesh();
             var indexMap = new int[planes.Length+1][]; // Note: This can become quite wasteful in terms of memory consumption
 
-            var addFace = new Action<int, MeshFace>((i, face) =>
+            bool copyVertexNormals = mesh.Normals.Count == mesh.Vertices.Count;
+            bool copyVertexColors = mesh.VertexColors.Count == mesh.Vertices.Count;
+            bool copyFaceNormals = mesh.FaceNormals.Count == mesh.Faces.Count;
+
+            var addFace = new Action<int, int>((meshIndex, faceIndex) =>
             {
-                if (indexMap[i] == null)
-                    indexMap[i] = new int[mesh.Vertices.Count];
-                AddFaceToMesh(mesh, face, _meshes[i], indexMap[i]);
+                if (indexMap[meshIndex] == null)
+                    indexMap[meshIndex] = new int[mesh.Vertices.Count];
+                AddFaceToMesh(mesh, faceIndex, _meshes[meshIndex], indexMap[meshIndex], copyVertexNormals, copyVertexColors, copyFaceNormals);
             });
 
-            foreach (var face in mesh.Faces)
+            for (int faceIndex = 0; faceIndex < mesh.Faces.Count; faceIndex++)
             {
+                var face = mesh.Faces[faceIndex];
                 bool added = false;
-                for (int i=0; i < planes.Length; i++)
+                for (int planeIndex=0; planeIndex < planes.Length; planeIndex++)
                 {
-                    var plane = planes[i];
+                    var plane = planes[planeIndex];
                     if (IsFaceInNegativeHalfspace(mesh, face, plane))
                     {
-                        addFace(i, face);
+                        addFace(planeIndex, faceIndex);
                         added = true;
                         break;
                     }
@@ -103,7 +132,7 @@ namespace NoahsArk.SharedRhino
                 if (added)
                     continue;
 
-                addFace(planes.Length, face);
+                addFace(planes.Length, faceIndex);
             }
 
             meshes = _meshes;
@@ -146,10 +175,14 @@ namespace NoahsArk.SharedRhino
             var currentMesh = new Mesh();
             var indexMap = new int[mesh.Vertices.Count];
 
+            bool copyVertexNormals = mesh.Normals.Count == mesh.Vertices.Count;
+            bool copyVertexColors = mesh.VertexColors.Count == mesh.Vertices.Count;
+            bool copyFaceNormals = mesh.FaceNormals.Count == mesh.Faces.Count;
+
             for (int i = 0; i < mesh.Faces.Count; i++)
             {
-                var face = mesh.Faces[sortedFaces[i].OriginalIndex];
-                AddFaceToMesh(mesh, face, currentMesh, indexMap);
+                var faceIndex = sortedFaces[i].OriginalIndex;
+                AddFaceToMesh(mesh, faceIndex, currentMesh, indexMap, copyVertexNormals, copyVertexColors, copyFaceNormals);
                 if (currentMesh.Vertices.Count + 4 > maxVertexCount)
                 {
                     meshes.Add(currentMesh);
