@@ -76,12 +76,12 @@ namespace NoahsArk.SharedRhino
             }
 
             var _meshes = new Mesh[planes.Length+1];
+            for (int i=0; i<_meshes.Length; i++)
+                _meshes[i] = new Mesh();
             var indexMap = new int[planes.Length+1][]; // Note: This can become quite wasteful in terms of memory consumption
 
             var addFace = new Action<int, MeshFace>((i, face) =>
             {
-                if (_meshes[i] == null)
-                    _meshes[i] = new Mesh();
                 if (indexMap[i] == null)
                     indexMap[i] = new int[mesh.Vertices.Count];
                 AddFaceToMesh(mesh, face, _meshes[i], indexMap[i]);
