@@ -205,6 +205,25 @@ namespace NoahsArk.Tests.SharedRhino
 
         }
 
+        [TestMethod]
+        public void Test_SplitForMaxVertexCount_02()
+        {
+            Mesh mesh = Mesh.CreateFromBox(new Box(Plane.WorldXY, new Interval(-1, 1), new Interval(-1, 1), new Interval(-1, 1)), 10, 10, 10);
+            for (int i=0; i<mesh.Vertices.Count; i++)
+                mesh.Vertices[i] = new Point3f(0, 0, 0);
+            int maxVertexCount = 100000;
+            MeshSplitter.SplitForMaxVertexCount(mesh, out Mesh[] meshes, maxVertexCount);
+
+            for (int i = 0; i < meshes.Length - 1; i++)
+            {
+                var m = meshes[i];
+                Assert.IsTrue(m.Vertices.Count <= maxVertexCount, $"Vertex count less or equal to {maxVertexCount}");
+            }
+
+            Assert.AreEqual(mesh.Faces.Count, meshes.Sum(m => m.Faces.Count), "Face count matches");
+
+        }
+
         /// <summary>
         /// Test cleanup per test, will be called once for each test
         /// Change signature to "async Task" in case of async tests

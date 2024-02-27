@@ -151,7 +151,7 @@ namespace NoahsArk.SharedRhino
             meshes = _meshes;
         }
 
-        public struct IndexedNumber
+        private struct IndexedNumber
         {
             public double Number;
             public int OriginalIndex;
