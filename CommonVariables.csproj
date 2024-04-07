@@ -47,7 +47,7 @@
     <YakAuthors>$(CommonAuthors), $(CommonCompany)</YakAuthors>
     <YakDescription>$(CommonProduct)</YakDescription>
     <YakUrl>https://github.com/shapediver/GrasshopperPluginTemplate</YakUrl>
-    <YakIconUrl>https://github.com/shapediver/GrasshopperPluginTemplate/blob/a7fc6515609bc84d99f9b8dc5f2f062899a7eb11/Artwork/NoahsArkIcon_32.png</YakIconUrl>
+    <YakIconFile>$(MSBuildThisFileDirectory)/Artwork/NoahsArkIcon_64.png</YakIconFile>
     <YakKeywords>- ShapeDiver
 - Grasshopper
 - Template</YakKeywords>

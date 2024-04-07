@@ -6,6 +6,6 @@ authors:
 description: >
   $description$
 url: $url$
-icon_url: "$icon_url$"
+icon: icon.png
 keywords:
 $keywords$

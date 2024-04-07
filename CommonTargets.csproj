@@ -30,8 +30,9 @@
     <ReplaceFileText InputFilename="$(YakYamlFile)" OutputFilename="$(YakYamlFile)" MatchExpression="\$authors\$" ReplacementText="$(YakAuthors)" />
     <ReplaceFileText InputFilename="$(YakYamlFile)" OutputFilename="$(YakYamlFile)" MatchExpression="\$description\$" ReplacementText="$(YakDescription)" />
     <ReplaceFileText InputFilename="$(YakYamlFile)" OutputFilename="$(YakYamlFile)" MatchExpression="\$url\$" ReplacementText="$(YakUrl)" />
-    <ReplaceFileText InputFilename="$(YakYamlFile)" OutputFilename="$(YakYamlFile)" MatchExpression="\$icon_url\$" ReplacementText="$(YakIconUrl)" />
     <ReplaceFileText InputFilename="$(YakYamlFile)" OutputFilename="$(YakYamlFile)" MatchExpression="\$keywords\$" ReplacementText="$(YakKeywords)" />
+    <!-- copy icon file -->
+    <Copy SourceFiles="$(YakIconFile)" DestinationFiles="$(YakBuildPath)/icon.png" />
     <!-- remove pdb files etc -->
     <!-- see example here: https://learn.microsoft.com/en-us/visualstudio/msbuild/delete-task?view=vs-2022 -->
     <ItemGroup>
