@@ -20,7 +20,15 @@
     <CommonVersionSuffix>-alpha</CommonVersionSuffix>
   </PropertyGroup>
   <!--
-    Common name and namespace for all projects
+    GUIDs for the Grasshopper and the Rhino Plug-In. Make sure to set these to unique values.
+  -->
+  <PropertyGroup>
+    <GrasshopperPluginGuid>96217CE5-E37A-4BC6-93C3-CBCBAB996A90</GrasshopperPluginGuid>
+    <RhinoPluginGuid>B3E2C198-FC06-4387-9754-B3DA55559A66</RhinoPluginGuid>
+  </PropertyGroup>
+  <!--
+    Common name and namespace for all projects. In case you change the namespace, please also do
+    a search and replace operation on all code files.
   -->
   <PropertyGroup>
     <CommonNamespace>NoahsArk</CommonNamespace>

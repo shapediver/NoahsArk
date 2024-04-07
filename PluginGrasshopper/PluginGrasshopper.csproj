@@ -43,7 +43,7 @@
       see https://learn.microsoft.com/en-us/dotnet/standard/assembly/set-attributes-project-file#set-arbitrary-attributes
     -->
     <AssemblyAttribute Include="System.Runtime.InteropServices.GuidAttribute">
-      <_Parameter1>96217CE5-E37A-4BC6-93C3-CBCBAB996A90</_Parameter1>
+      <_Parameter1>$(GrasshopperPluginGuid)</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
   
