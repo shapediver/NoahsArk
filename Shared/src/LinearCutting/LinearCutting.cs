@@ -35,6 +35,7 @@ namespace NoahsArk.Shared.LinearCutting
         int toolWidth;                
         /// <summary>
         /// Unconditional withdrawal
+        /// TODO: to be clarified
         /// </summary>
         int headlessRetreat;
 
@@ -113,7 +114,10 @@ namespace NoahsArk.Shared.LinearCutting
         /// <param name="whipLength_">Whip length</param>
         /// <param name="endSawCut_">End cut</param>
         /// <param name="toolWidth_">Tool width</param>
-        /// <param name="headlessRetreat_">Uncoditional withdrawal</param>
+        /// <param name="headlessRetreat_">
+        /// Uncoditional withdrawal
+        /// TODO: to be clarified
+        /// </param>
         public LinearCutting(List<int> desiredLengths_, List<int> amount_, int whipLength_, int endSawCut_, int toolWidth_, int headlessRetreat_)
         {
             desiredLengths = new List<int>(desiredLengths_);

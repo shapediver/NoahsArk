@@ -24,7 +24,7 @@ namespace NoahsArk.PluginGrasshopper
         /// Subcategory the panel. If you use non-existing tab or panel names, 
         /// new tabs/panels will automatically be created.
         /// </summary>
-        public LinearCuttingComponent() : base("1D Linear Cutting", "1DLinCut", "1D Linear Cutting program", "NoahsArk", "Fabrication")
+        public LinearCuttingComponent() : base("1D Linear Cutting", "1DLinCut", "1D Linear Cutting program - Credits to Alexander Morozov", "NoahsArk", "Fabrication")
         {
         }
 
