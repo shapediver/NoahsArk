@@ -22,6 +22,10 @@ In future versions of Rhino, this might leave old widespread plug-ins behind.
 
 For these reasons, we initiated _Noah’s Ark_. 
 
+## Functionality
+
+The initial release contains a component for approximate solutions to the [Cutting stock problem](https://en.wikipedia.org/wiki/Cutting_stock_problem) (1D cutoff optimization). The source code was adapted from this [repository](https://github.com/AlexanderMorozovDesign/GH_Linear_Cutting) and integrated into Noah's Ark with the author's permission, [Alexander Morozov](https://github.com/AlexanderMorozovDesign). 
+
 ## How to contribute
 
 Fork and clone the repository, develop your extension to Noah's Ark, and open a [pull request](https://github.com/shapediver/NoahsArk/pulls). 
