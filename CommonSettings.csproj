@@ -114,6 +114,13 @@
     <Company>$(CommonCompany)</Company>
     <CopyRight>$(CommonCopyright)</CopyRight>
     <Product>$(CommonProduct)</Product>
+    <!--
+        Disable including of the source revision (commit hash) in the informational version. 
+        https://learn.microsoft.com/en-us/dotnet/core/compatibility/sdk/8.0/source-link
+        When enabling this, the version number looks like this (note the hash string after the plus sign)
+        "0.1.0-alpha+2efb2aa02f1dfdfd991b85e756b86d555b557252"
+    -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
   
   <ItemGroup>
